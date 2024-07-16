@@ -7,6 +7,7 @@ keymap.set({ "n", "x" }, ";", ":")
 
 -- Turn the word under cursor to upper case
 keymap.set("i", "<c-u>", "<Esc>viwUea")
+-- keymap.del("i", "<c-d")
 keymap.set("i", "<c-d>", "<Esc>viwuea")
 
 -- Quickly go to normal mode
@@ -14,6 +15,7 @@ keymap.set("i", "jj", "<Esc>")
 
 -- Quickly move to the right 
 keymap.set("i", "<c-l>", "<Esc>la")
+-- keymap.del("i", "<c-h>")
 keymap.set("i", "<c-h", "<Esc>i")
 
 -- Turn the current word into title case
@@ -216,8 +218,8 @@ keymap.set("i", "<C-E>", "<END>")
 -- Go to beginning of command in command-line mode
 keymap.set("c", "<C-A>", "<HOME>")
 
--- Delete the character to the right of the cursor
-keymap.set("i", "<C-D>", "<DEL>")
+-- -- Delete the character to the right of the cursor
+keymap.set("i", "<Leader><BS>>", "<DEL>")
 
 keymap.set("n", "<leader>cb", function()
   local cnt = 0
@@ -243,3 +245,8 @@ keymap.set("n", "<c-j>", "<c-w>j")
 keymap.set("n", "<c-k>", "<c-w>k")
 keymap.set("n", "<c-h>", "<c-w>h")
 keymap.set("n", "<c-l>", "<c-w>l")
+
+vim.g.expandtab = true
+vim.g.tabstop = 4
+vim.g.softtabstop = 4
+vim.g.shiftwidth = 4
