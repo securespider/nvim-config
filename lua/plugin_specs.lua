@@ -516,6 +516,11 @@ local plugin_specs = {
       require("config.fidget-nvim")
     end,
   },
+
+  -- Better searching
+  {
+      "justinmk/vim-sneak",
+  },
 }
 
 -- configuration for lazy itself.

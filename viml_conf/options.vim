@@ -174,5 +174,9 @@ set diffopt+=context:3  " context for diff
 set diffopt+=internal,indent-heuristic,algorithm:histogram
 set diffopt+=linematch:60
 
-set wrap  " do no wrap
+set wrap  " do wrap
 set noruler
+
+" Set up highlights for git
+highlight GitSignsChangeInline gui=NONE
+highlight GitSignsAdd gui=NONE

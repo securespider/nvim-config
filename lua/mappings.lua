@@ -13,10 +13,9 @@ keymap.set("i", "<c-d>", "<Esc>viwuea")
 -- Quickly go to normal mode
 keymap.set("i", "jj", "<Esc>")
 
--- Quickly move to the right 
+-- Quickly move to the right
 keymap.set("i", "<c-l>", "<Esc>la")
--- keymap.del("i", "<c-h>")
-keymap.set("i", "<c-h", "<Esc>i")
+keymap.set("i", "<c-h>", "<Esc>i")
 
 -- Turn the current word into title case
 keymap.set("i", "<c-t>", "<Esc>b~lea")
@@ -29,10 +28,13 @@ keymap.set("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" 
 keymap.set("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "save buffer" })
 
 -- Saves the file if modified and quit
-keymap.set("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "quit current window" })
+keymap.set("n", "<leader>q", "<cmd>bn<bar>vsp<bar>bp<bar>bd<cr>", { silent = true, desc = "quit current window" })
 
 -- Quit all opened buffers
 keymap.set("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
+
+-- Remove any search highlighting
+keymap.set("n", "<leader>l", "<cmd>nohlsearch<cr>", { silent = true, desc = "remove search highlight" })
 
 -- Navigation in the location and quickfix list
 keymap.set("n", "[l", "<cmd>lprevious<cr>zv", { silent = true, desc = "previous location item" })
@@ -245,8 +247,3 @@ keymap.set("n", "<c-j>", "<c-w>j")
 keymap.set("n", "<c-k>", "<c-w>k")
 keymap.set("n", "<c-h>", "<c-w>h")
 keymap.set("n", "<c-l>", "<c-w>l")
-
-vim.g.expandtab = true
-vim.g.tabstop = 4
-vim.g.softtabstop = 4
-vim.g.shiftwidth = 4
