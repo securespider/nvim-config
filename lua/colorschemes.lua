@@ -82,3 +82,6 @@ end
 -- Load a random colorscheme
 M.colorscheme_conf["gruvbox_material"]()
 -- M.rand_colorscheme()
+vim.cmd([[hi GitSignsChangeInline gui=bold]])
+vim.cmd([[hi GitSignsAddInline gui=bold]])
+vim.cmd([[hi GitSignsDeleteInline gui=None]])

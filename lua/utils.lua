@@ -38,6 +38,15 @@ function VerticalSplitBuffer(buffer)
 end
 vim.api.nvim_create_user_command("Vbuffer", VerticalSplitBuffer, { nargs = 1 })
 
+function ListCwd()
+    local cwd = fn.getcwd()
+    local files = fn.readdir(cwd)
+    for _, file in ipairs(files) do
+        print(file)
+    end
+end
+vim.api.nvim_create_user_command("Ls", ListCwd, { nargs = 0 })
+
 --- Generate random integers in the range [Low, High], inclusive,
 --- adapted from https://stackoverflow.com/a/12739441/6064933
 --- @low: the lower value for this range
