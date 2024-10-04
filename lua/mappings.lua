@@ -16,6 +16,8 @@ keymap.set("i", "jj", "<Esc>")
 -- Quickly move to the right
 keymap.set("i", "<c-l>", "<Esc>la")
 keymap.set("i", "<c-h>", "<Esc>i")
+keymap.set("i", "<c-w>", "<Esc>ea")
+keymap.set("i", "<c-b>", "<Esc>bi")
 
 -- Turn the current word into title case
 keymap.set("i", "<c-t>", "<Esc>b~lea")

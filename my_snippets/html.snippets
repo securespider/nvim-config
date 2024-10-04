@@ -1,0 +1,11 @@
+snippet file "File Upload" b
+<form action="/${1:api}" method="post" enctype="multipart/form-data">
+	<input type="file" name="file">
+	<button type="submit">${2:Upload}</button>
+</form>
+$0
+endsnippet
+
+snippet csrf "CSRF Token" b
+{% csrf_token %}
+endsnippet

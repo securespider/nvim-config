@@ -1,7 +1,7 @@
 snippet head "Python source file header" b
 """
 Description: $1
-Author: Jie-dong Hao (jdhao@hotmail.com)
+Author: `git config user.name` (`git config user.email`)
 Created: `!v strftime("%Y-%m-%d %H:%M:%S%z")`
 """
 $0
@@ -25,6 +25,63 @@ if __name__ == "__main__":
 	main()
 endsnippet
 
-snippet sol "solution" b
-solution = Solution()
+snippet djurl "Django url file template" b
+from django.urls import path
+from . import views
+
+urlpatterns = [
+	path('${1:path}/', views.${2:$1}, name='$1')
+]
 endsnippet
+
+snippet " "String element in list"
+"${1:element}",
+endsnippet
+
+snippet [ "String element in list"
+[${1:element}]
+endsnippet
+
+snippet serial "Django Serializer" b
+class ${1:Model}Serializer(serializers.${2:ModelSerializer}):
+	class Meta:
+		model = $1
+		fields = ${3:'__all__'}
+endsnippet
+
+snippet modelviewset "Django model view set" b
+class ${1:Model}ViewSet(viewsets.ModelViewSet):
+	queryset = ${1:Model}.objects.all()
+	serializer_class = ${2:Model}Serializer
+endsnippet
+
+snippet viewset "Django view set" b
+class ${1:Object}ViewSet(viewsets.ViewSet):
+
+	def list(self, request):
+		${2:pass}
+
+	def create(self, request):
+		${3:pass}
+
+	def retrieve(self, request, pk=None):
+		${4:pass}
+
+	def update(self, request, pk=None):
+		${5:pass}
+
+	def partial_update(self, request, pk=None):
+		${6:pass}
+
+	def destroy(self, request, pk=None:
+		${7:pass}
+endsnippet
+
+snippet str "String representation of object eg. printing" b
+str(${1:${VISUAL}})
+endsnippet
+
+snippet todo "Todo for python" b
+# TODO: ${1:${VISUAL:Fix}} <`date +%x`, ${2:securespider}> #
+endsnippet
+
