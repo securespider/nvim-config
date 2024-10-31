@@ -68,12 +68,13 @@ local plugin_specs = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = function()
-      if vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
+    -- enabled = function()
+    --   if vim.g.is_mac then
+    --     return true
+    --   end
+    --   return false
+    -- end,
+    enabled = true,
     event = "VeryLazy",
     build = ":TSUpdate",
     config = function()
@@ -533,6 +534,24 @@ local plugin_specs = {
   -- HTML parser in nvim
   {
       "rest-nvim/rest.nvim",
+  },
+
+  {
+      "windwp/nvim-ts-autotag",
+        event = "VeryLazy",
+        build = ":TSUpdate",
+        config = function()
+        require("config.treesitter")
+        end,
+  },
+
+  {
+      "HiPhish/nvim-ts-rainbow2",
+        event = "VeryLazy",
+        build = ":TSUpdate",
+        config = function()
+        require("config.treesitter")
+        end,
   },
 }
 
