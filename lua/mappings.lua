@@ -49,6 +49,10 @@ keymap.set("n", "]q", "<cmd>cnext<cr>zv", { silent = true, desc = "next qf item"
 keymap.set("n", "[Q", "<cmd>cfirst<cr>zv", { silent = true, desc = "first qf item" })
 keymap.set("n", "]Q", "<cmd>clast<cr>zv", { silent = true, desc = "last qf item" })
 
+-- Zoom in and out the current pane
+keymap.set("n", "<leader>zi", "<cmd>tab split<cr>", { desc = "zoom in" })
+keymap.set("n", "<leader>zo", "<cmd>tab close<cr>", { desc = "zoom out" })
+
 -- Close location list or quickfix list if they are present, see https://superuser.com/q/355325/736190
 keymap.set("n", [[\x]], "<cmd>windo lclose <bar> cclose <cr>", {
   silent = true,
@@ -172,12 +176,6 @@ keymap.set("n", "gB", '<cmd>call buf_utils#GoToBuffer(v:count, "backward")<cr>',
   desc = "go to buffer (backward)",
 })
 
--- Switch windows
-keymap.set("n", "<left>", "<c-w>h")
-keymap.set("n", "<Right>", "<C-W>l")
-keymap.set("n", "<Up>", "<C-W>k")
-keymap.set("n", "<Down>", "<C-W>j")
-
 -- Text objects for URL
 keymap.set({ "x", "o" }, "iu", "<cmd>call text_obj#URL()<cr>", { desc = "URL text object" })
 
@@ -242,8 +240,12 @@ keymap.set("n", "<leader>cb", function()
   end))
 end)
 
--- Change between tabs
+-- Change between pane
 keymap.set("n", "<c-j>", "<c-w>j")
 keymap.set("n", "<c-k>", "<c-w>k")
 keymap.set("n", "<c-h>", "<c-w>h")
 keymap.set("n", "<c-l>", "<c-w>l")
+keymap.set("n", "<Left>", "<c-w>h")
+keymap.set("n", "<Right>", "<C-W>l")
+keymap.set("n", "<Up>", "<C-W>k")
+keymap.set("n", "<Down>", "<C-W>j")

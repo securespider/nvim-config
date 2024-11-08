@@ -180,3 +180,4 @@ set noruler
 " Set up highlights for git
 highlight GitSignsChangeInline gui=NONE
 highlight GitSignsAdd gui=NONE
+set rtp+=/opt/homebrew/opt/fzf
