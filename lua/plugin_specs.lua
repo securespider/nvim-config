@@ -68,12 +68,13 @@ local plugin_specs = {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    enabled = function()
-      if vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
+    -- enabled = function()
+    --   if vim.g.is_mac then
+    --     return true
+    --   end
+    --   return false
+    -- end,
+    enabled = true,
     event = "VeryLazy",
     build = ":TSUpdate",
     config = function()
@@ -146,15 +147,15 @@ local plugin_specs = {
     config = true, -- or `opts = {}`
   },
   -- A list of colorscheme plugin you may want to try. Find what suits you.
-  { "navarasu/onedark.nvim", lazy = true },
-  { "sainnhe/edge", lazy = true },
-  { "sainnhe/sonokai", lazy = true },
+  -- { "navarasu/onedark.nvim", lazy = true },
+  -- { "sainnhe/edge", lazy = true },
+  -- { "sainnhe/sonokai", lazy = true },
   { "sainnhe/gruvbox-material", lazy = true },
-  { "sainnhe/everforest", lazy = true },
-  { "EdenEast/nightfox.nvim", lazy = true },
-  { "catppuccin/nvim", name = "catppuccin", lazy = true },
-  { "olimorris/onedarkpro.nvim", lazy = true },
-  { "marko-cerovac/material.nvim", lazy = true },
+  -- { "sainnhe/everforest", lazy = true },
+  -- { "EdenEast/nightfox.nvim", lazy = true },
+  -- { "catppuccin/nvim", name = "catppuccin", lazy = true },
+  -- { "olimorris/onedarkpro.nvim", lazy = true },
+  -- { "marko-cerovac/material.nvim", lazy = true },
 
   { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 
@@ -550,6 +551,23 @@ local plugin_specs = {
         },
       },
     },
+    }, 
+  -- Skeleton files for different file formats
+  {
+      "cvigilv/esqueleto.nvim",
+      opts = {},
+      config = function()
+          require("esqueleto").setup(
+          {
+              patterns = { "LICENSE", "python"}
+          }
+          )
+      end,
+  },
+
+  -- HTML parser in nvim
+  {
+      "rest-nvim/rest.nvim",
   },
 }
 

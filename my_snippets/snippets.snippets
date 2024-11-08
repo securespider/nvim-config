@@ -4,3 +4,7 @@ snippet snip "Ultisnips snippet definition" b
 ${0:${VISUAL}}
 `!p snip.rv = "endsnippet"`
 endsnippet
+
+snippet $ "Encapsulate in cursor definition"
+${${1:1}:${2:${VISUAL:default}}}${0}
+endsnippet
