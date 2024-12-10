@@ -103,3 +103,6 @@ local function open_nvim_tree(data)
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+-- Saves file with sudo
+api.nvim_create_user_command("W", "w !sudo tee % > /dev/null", {})
