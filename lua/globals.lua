@@ -38,6 +38,7 @@ end
 
 -- Custom mapping <leader> (see `:h mapleader` for more info)
 vim.g.mapleader = ','
+vim.g.maplocalleader = "."
 
 -- Enable highlighting for lua HERE doc inside vim script
 vim.g.vimsyn_embed = 'l'
@@ -76,6 +77,6 @@ vim.g.loaded_sql_completion = 1
 
 -- Use spaces instead of tabs
 vim.g.expandtab = true
-vim.g.tabstop = 4
-vim.g.softtabstop = 4
-vim.g.shiftwidth = 4
+vim.g.tabstop = 2
+vim.g.softtabstop = 2
+vim.g.shiftwidth = 2

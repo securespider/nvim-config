@@ -408,13 +408,17 @@ local plugin_specs = {
   -- Only use these plugin on Windows and Mac and when LaTeX is installed
   {
     "lervag/vimtex",
-    enabled = function()
-      if utils.executable("latex") then
-        return true
-      end
-      return false
-    end,
-    ft = { "tex" },
+    lazy=false,
+    init = function()
+        vim.g.vimtex_view_method = "zathura"
+    end
+    -- enabled = function()
+    --   if utils.executable("latex") then
+    --     return true
+    --   end
+    --   return false
+    -- end,
+    -- ft = { "tex" },
   },
 
   -- Since tmux is only available on Linux and Mac, we only enable these plugins
@@ -563,11 +567,6 @@ local plugin_specs = {
           }
           )
       end,
-  },
-
-  -- HTML parser in nvim
-  {
-      "rest-nvim/rest.nvim",
   },
 }
 
