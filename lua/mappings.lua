@@ -213,6 +213,9 @@ end
 -- insert semicolon in the end
 keymap.set("i", "<A-;>", "<Esc>miA;<Esc>`ii")
 
+-- insert dollar in front
+keymap.set("i", "<A-$>", "<Esc>mibi$<Esc>`ii")
+
 -- Go to the beginning and end of current line in insert mode quickly
 keymap.set("i", "<C-A>", "<HOME>")
 keymap.set("i", "<C-E>", "<END>")

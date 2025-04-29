@@ -207,20 +207,6 @@ local plugin_specs = {
     end,
   },
 
-  -- For Windows and Mac, we can open an URL in the browser. For Linux, it may
-  -- not be possible since we maybe in a server which disables GUI.
-  {
-    "tyru/open-browser.vim",
-    enabled = function()
-      if vim.g.is_win or vim.g.is_mac then
-        return true
-      else
-        return false
-      end
-    end,
-    event = "VeryLazy",
-  },
-
   -- Only install these plugins if ctags are installed on the system
   -- show file tags in vim window
   {
@@ -248,13 +234,11 @@ local plugin_specs = {
   },
 
   -- Comment plugin
-  { "tpope/vim-commentary", event = "VeryLazy" },
-
-  -- Multiple cursor plugin like Sublime Text?
-  -- 'mg979/vim-visual-multi'
-
-  -- Autosave files on certain events
-  -- { "907th/vim-auto-save", event = "InsertEnter" },
+  { "numToStr/Comment.nvim",
+    config = function()
+      require('Comment').setup()
+    end,
+  },
 
   -- Show undo history visually
   { "simnalamburt/vim-mundo", cmd = { "MundoToggle", "MundoShow" } },
@@ -279,32 +263,10 @@ local plugin_specs = {
   -- Handy unix command inside Vim (Rename, Move etc.)
   { "tpope/vim-eunuch", cmd = { "Rename", "Delete" } },
 
-  -- Repeat vim motions
+  -- Repeat vim motions for . commands
   { "tpope/vim-repeat", event = "VeryLazy" },
 
   { "nvim-zh/better-escape.vim", event = { "InsertEnter" } },
-
-  {
-    "lyokha/vim-xkbswitch",
-    enabled = function()
-      if vim.g.is_mac and utils.executable("xkbswitch") then
-        return true
-      end
-      return false
-    end,
-    event = { "InsertEnter" },
-  },
-
-  {
-    "Neur1n/neuims",
-    enabled = function()
-      if vim.g.is_win then
-        return true
-      end
-      return false
-    end,
-    event = { "InsertEnter" },
-  },
 
   -- Auto format tools
   { "sbdchd/neoformat", cmd = { "Neoformat" } },
@@ -361,19 +323,6 @@ local plugin_specs = {
   -- Vim tabular plugin for manipulate tabular, required by markdown plugins
   { "godlygeek/tabular", cmd = { "Tabularize" } },
 
-  -- Markdown previewing (only for Mac and Windows)
-  {
-    "iamcco/markdown-preview.nvim",
-    enabled = function()
-      if vim.g.is_win or vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
-    build = "cd app && npm install",
-    ft = { "markdown" },
-  },
-
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
@@ -398,9 +347,6 @@ local plugin_specs = {
   -- Additional powerful text object for vim, this plugin should be studied
   -- carefully to use its full power
   { "wellle/targets.vim", event = "VeryLazy" },
-
-  -- Plugin to manipulate character pairs quickly
-  { "machakann/vim-sandwich", event = "VeryLazy" },
 
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VeryLazy" },
@@ -433,29 +379,6 @@ local plugin_specs = {
       return false
     end,
     ft = { "tmux" },
-  },
-
-  -- Modern matchit implementation
-  { "andymass/vim-matchup", event = "BufRead" },
-  { "tpope/vim-scriptease", cmd = { "Scriptnames", "Message", "Verbose" } },
-
-  -- Asynchronous command execution
-  { "skywind3000/asyncrun.vim", lazy = true, cmd = { "AsyncRun" } },
-  { "cespare/vim-toml", ft = { "toml" }, branch = "main" },
-
-  -- Edit text area in browser using nvim
-  {
-    "glacambre/firenvim",
-    enabled = function()
-      if vim.g.is_win or vim.g.is_mac then
-        return true
-      end
-      return false
-    end,
-    build = function()
-      vim.fn["firenvim#install"](0)
-    end,
-    lazy = true,
   },
 
   -- Debugger plugin
@@ -523,51 +446,67 @@ local plugin_specs = {
   },
 
   {
-      "epwalsh/obsidian.nvim",
-      version = "*",  -- recommended, use latest release instead of latest commit
-      lazy = true,
-      config = function()
-        require("obsidian").setup()
-      end,
-      ft = "markdown",
-      -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-      -- event = {
-      --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-      --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      --   "BufReadPre path/to/my-vault/**.md",
-      --   "BufNewFile path/to/my-vault/**.md",
-      -- },
-      dependencies = {
+    "epwalsh/obsidian.nvim",
+    version = "*",  -- recommended, use latest release instead of latest commit
+    lazy = true,
+    config = function()
+      require("obsidian").setup()
+    end,
+    -- ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      -- "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      -- "BufReadPre " .. path/to/my-vault/**.md",
+      -- "BufNewFile path/to/my-vault/**.md",
+    -- },
+    dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
 
       -- see below for full list of optional dependencies 👇
-      },
-      opts = {
-      workspaces = {
-        {
-            name = "personal",
-            path = "~/vaults/personal",
-        },
-        {
-            name = "work",
-            path = "~/vaults/work",
-        },
-      },
     },
-    }, 
-  -- Skeleton files for different file formats
-  {
-      "cvigilv/esqueleto.nvim",
-      opts = {},
-      config = function()
-          require("esqueleto").setup(
-          {
-              patterns = { "LICENSE", "python"}
-          }
-          )
-      end,
+    -- opts = {
+    --   workspaces = {
+    --     {
+    --       name = "personal",
+    --       path = "~/vaults/personal",
+    --     },
+    --     {
+    --       name = "work",
+    --       path = "~/vaults/work",
+    --     },
+    --   },
+    -- },
   },
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
+  {
+    {
+      'arminveres/md-pdf.nvim',
+      branch = 'main', -- you can assume that main is somewhat stable until releases will be made
+      lazy = true,
+      keys = {
+        {
+          "<leader>,",
+          function() require("md-pdf").convert_md_to_pdf() end,
+          desc = "Markdown preview",
+        },
+      },
+      ---@type md-pdf.config
+      opts = {},
+    }
+  }
 }
 
 -- configuration for lazy itself.
